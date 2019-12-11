@@ -80,9 +80,8 @@ arguments = {
 def unsign8(i):
     return i & 0xFF
 def sign8(i):
-    return (i ^ 0x80) - 0x80
+    return ((i & 0xFF) ^ 0x80) - 0x80
 def unsign16(i):
     return i & 0xFFFF
 def sign16(i):
-    return (i ^ 0x8000) - 0x8000
-    
+    return ((i & 0xFFFF) ^ 0x8000) - 0x8000
