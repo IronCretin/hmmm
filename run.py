@@ -1,3 +1,18 @@
+#!/usr/bin/python
+# hmmmSimulator.py
+#
+# $Id: hmmmSimulator.py,v 1.4 2007/10/08 08:10:12 geoff Exp $
+#
+# Ran Libeskind-Hadas, 2006
+# modified by Peter Mawhorter, June 2006
+# extensively modified by Geoff Kuenning, October 2007
+# Swami Iyer (UMass Boston), 2015
+#   - Modified read opcode to read without prompt and to read an integer 
+#     from STDIN using the standard libraries from Princeton. This allows 
+#     redirection of standard input using the < operator.
+# Rewrittern by Paul Maynard, 2019
+
+
 import sys
 from hmmm import *
 from array import array
