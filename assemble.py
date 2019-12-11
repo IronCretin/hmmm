@@ -26,7 +26,7 @@ def parse(lines):
                 args = []
             yield line, instr, args
 
-def mkinstr(name, args):
+def pack(name, args):
     name = aliases.get(name, name)
     op = opdict[name]
     fields = arguments[name]
@@ -64,11 +64,12 @@ def assemble(lines):
     for line, name, args in lines:
         if len(out) <= line:
             out.extend([0] + [0] * (line - len(out)))
-        out[line] = mkinstr(name, args)
+        out[line] = pack(name, args)
     # if sys.byteorder == 'little': out.byteswap()
-    return out.tobytes()
+    return out
 
 if __name__ == "__main__":
-    with open(sys.argv[1]) as fin, open(sys.argv[1].partition('.')[0] + '.b', 'wb') as fout:
+    with open(sys.argv[1] + '.hmmm') as fin, open(sys.argv[1] + '.b', 'wb') as fout:
         code = assemble(parse(fin))
-        fout.write(code)
+        fout.write(len(code).to_bytes(2, sys.byteorder))
+        code.tofile(fout)
