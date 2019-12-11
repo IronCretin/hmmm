@@ -77,6 +77,18 @@ def run(code):
             x = getr(rsrc)
             mem[getr(raddr)] = unsign16(x)
             pc += 1
+        elif op == "popr":
+            rdest, raddr = unpack(instr, arguments[op])
+            x = mem[getr(raddr)]
+            putr(rdest, x)
+            putr(raddr, getr(raddr) - 1)
+            pc += 1
+        elif op == "pushn":
+            rsrc, raddr = unpack(instr, arguments[op])
+            x = getr(rsrc)
+            mem[getr(raddr)] = unsign16(x)
+            putr(raddr, getr(raddr) + 1)
+            pc += 1
         elif op == "addn":
             r, n = unpack(instr, arguments[op])
             putr(r, getr(r) + n)
@@ -163,11 +175,13 @@ def unpack(instr, fields):
         elif f == 'n':
             yield sign16(i)
 
+
+
 if __name__ == '__main__':
     with open(sys.argv[1] + '.b', 'rb') as f:
         version = f.read(1)[0]
-        if version == 0:
-            header = headers[0]
+        if version in (0, 1):
+            header = '!HH'
             start, length = struct.unpack(header, f.read(struct.calcsize(header)))
             f.seek(start)
             code = array('H')

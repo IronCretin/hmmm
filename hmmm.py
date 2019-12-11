@@ -10,6 +10,8 @@ opcodes = [
     (0x2000, 0xF000, "store"),
     (0x4000, 0xF00F, "loadi"),
     (0x4001, 0xF00F, "storei"),
+    (0x4002, 0xF00F, "popr"),
+    (0x4001, 0xF00F, "pushr"),
     (0x5000, 0xF000, "addn"),
     (0x6000, 0xFFFF, "nop"),
     (0x6000, 0xF00F, "mov"),
@@ -59,6 +61,8 @@ arguments = {
     "store": "ru",
     "loadi": "rr",
     "storei": "rr",
+    "popr": "rr",
+    "pushr": "rr",
     "addn": "rs",
     "add": "rrr",
     "mov": "rr",
@@ -86,6 +90,4 @@ def unsign16(i):
 def sign16(i):
     return ((i & 0xFFFF) ^ 0x8000) - 0x8000
 
-headers = ['!HH']
-
-VERSION = 0
+VERSION = 1

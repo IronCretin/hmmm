@@ -73,6 +73,6 @@ if __name__ == "__main__":
     with open(sys.argv[1] + '.hmmm') as fin, open(sys.argv[1] + '.b', 'wb') as fout:
         code = assemble(parse(fin))
         fout.write(VERSION.to_bytes(1, 'little'))
-        header = headers[VERSION] # bytecode version, code start, code size (instructions)
+        header = '!HH' # bytecode version, code start, code size (instructions)
         fout.write(struct.pack(header, 1+struct.calcsize(header), len(code)))
         code.tofile(fout)
