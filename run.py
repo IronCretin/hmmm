@@ -16,6 +16,7 @@
 import sys
 from hmmm import *
 from array import array
+import struct
 
 def run(code):
     regs = array('h', [0] * 15)
@@ -164,7 +165,14 @@ def unpack(instr, fields):
 
 if __name__ == '__main__':
     with open(sys.argv[1] + '.b', 'rb') as f:
-        length = int.from_bytes(f.read(2), sys.byteorder)
-        code = array('H')
-        code.fromfile(f, length)
+        version = f.read(1)[0]
+        if version == 0:
+            header = headers[0]
+            start, length = struct.unpack(header, f.read(struct.calcsize(header)))
+            f.seek(start)
+            code = array('H')
+            code.fromfile(f, length)
+            if sys.byteorder == 'little': code.byteswap()
+        else:
+            raise ValueError(f"Unsupported file version: {version} (max supported is {VERSION}")
         run(code)

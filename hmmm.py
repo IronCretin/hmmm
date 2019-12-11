@@ -85,3 +85,7 @@ def unsign16(i):
     return i & 0xFFFF
 def sign16(i):
     return ((i & 0xFFFF) ^ 0x8000) - 0x8000
+
+headers = ['!HH']
+
+VERSION = 0
