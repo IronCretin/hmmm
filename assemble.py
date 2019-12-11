@@ -27,7 +27,7 @@ def parse(lines):
             yield line, instr, args
 
 def pack(name, args):
-    name = aliases.get(name, name)
+    # name = aliases.get(name, name)
     op = opdict[name]
     fields = arguments[name]
     i = 0

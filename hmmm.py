@@ -30,24 +30,24 @@ opcodes = [
 
 opdict = {name: code for code, _, name in opcodes}
 
-aliases = {
-    "setn":"loadn",
-    "copy":"mov",
-    "jumpn":"jump",
-    "jeqzn":"jeqz",
-    "jnezn":"jnez",
-    "jgtzn":"jgtz",
-    "jltzn":"jltz",
-    "calln":"call",
-    "jump":"jumpi",
-    "jumpr":"jumpi",
-    "loadn":"load",
-    "storen":"store",
-    "load":"loadi",
-    "loadr":"loadi",
-    "store":"storei",
-    "storer":"storei"
-}
+# aliases = {
+#     "setn":"loadn",
+#     "copy":"mov",
+#     "jumpn":"jump",
+#     "jeqzn":"jeqz",
+#     "jnezn":"jnez",
+#     "jgtzn":"jgtz",
+#     "jltzn":"jltz",
+#     "calln":"call",
+#     "jump":"jumpi",
+#     "jumpr":"jumpi",
+#     "loadn":"load",
+#     "storen":"store",
+#     "load":"loadi",
+#     "loadr":"loadi",
+#     "store":"storei",
+#     "storer":"storei"
+# }
 
 arguments = {
     "halt": "",
