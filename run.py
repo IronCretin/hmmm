@@ -174,5 +174,5 @@ if __name__ == '__main__':
             code.fromfile(f, length)
             if sys.byteorder == 'little': code.byteswap()
         else:
-            raise ValueError(f"Unsupported file version: {version} (max supported is {VERSION}")
+            raise ValueError(f"Unsupported file version: {version} (max supported is {VERSION})")
         run(code)
