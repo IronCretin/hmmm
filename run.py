@@ -21,11 +21,11 @@ import struct
 def dump(pc, regs, mem):
     print(f"pc: {pc}")
     print(*(f"r{r}".rjust(6) for r in range(1, 16)))
-    print(*(f"{r:6d}" for r in regs), end='')
+    print(*(f"{r:6d}" for r in regs))
     for i, m in enumerate(mem):
-        if i % 16 == 0:
-            print()
         print(f'{m:04x}', end=' ')
+        if i % 16 == 15:
+            print()
 
 def run(code):
     regs = array('h', [0] * 15)
@@ -39,13 +39,13 @@ def run(code):
     mem.extend([0] * (256 - len(code)))
     pc = 0
     while True:
-        dump(pc, regs, mem)
+        # dump(pc, regs, mem)
         instr = mem[pc]
-        print(bin(instr))
+        # print(bin(instr))
         for opcode, mask, op in opcodes:
             if instr & mask == opcode:
                 break
-        # print(op)
+        # print(op, *unpack(instr, arguments[op]))
         if op == "halt":
             break
         elif op == "nop":
