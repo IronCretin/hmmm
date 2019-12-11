@@ -14,8 +14,8 @@ from array import array
 from hmmm import *
 import sys
 
-def parse(prog):
-    for line in prog.split('\n'):
+def parse(lines):
+    for line in lines:
         line = line.partition('#')[0].strip()
         if line:
             line, instr, args = re.fullmatch(r'(\d+)\s+(\w+)(?:\s+([\w -]+)|)', line).groups()
@@ -69,6 +69,6 @@ def assemble(lines):
     return out.tobytes()
 
 if __name__ == "__main__":
-    print(assemble(parse(f"""
-    0 {sys.argv[1]}
-    """)).hex())
+    with open(sys.argv[1]) as fin, open(sys.argv[1].partition('.')[0] + '.b', 'wb') as fout:
+        code = assemble(parse(fin))
+        fout.write(code)
